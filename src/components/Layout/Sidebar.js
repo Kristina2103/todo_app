@@ -1,29 +1,29 @@
 import React from "react";
-import {
-  FaChevronDown,
-  FaInbox,
-  FaRegCalendarAlt,
-  FaRegCalendar,
-} from "react-icons/fa";
+import {Grid, AppBar, Toolbar,IconButton, Typography, Button} from '@material-ui/core';
+//Icons
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export const Sidebar = () => (
   <div className="sidebar" data-testid="sidebar">
     <ul className="sidebar__generic">
       <li>
         <span>
-          <FaInbox />
+          <InboxIcon />
         </span>
         <span>Inbox</span>
       </li>
       <li>
         <span>
-          <FaRegCalendar />
+          <CalendarTodayIcon />
         </span>
         <span>Today</span>
       </li>
       <li>
         <span>
-          <FaRegCalendarAlt />
+          <DateRangeIcon />
         </span>
         <span>Next 7 days</span>
       </li>
@@ -31,13 +31,11 @@ export const Sidebar = () => (
 
     {/* Sidebar Middle */}
     <div className="sidebar__middle">
-      <li>
-        <span>
-          <FaChevronDown />
-        </span>
-        <h2>Projects</h2>
-      </li>
-
+    
+        <Typography variant="h4">
+          <ExpandMoreIcon /> Projects
+        </Typography>
+     
       {/* Projects */}
       <ul className="sidebar__projects">
         <li>
