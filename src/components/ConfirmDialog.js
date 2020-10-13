@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Button} from "@material-ui/core";
 
-export const ConfirmDialog = ({open, handleClose,confirmModalAction, title}) => {
+export const ConfirmDialog = ({open,children, handleClose,confirmModalAction, title}) => {
     return (
         <Dialog
             open={open}
@@ -16,6 +16,7 @@ export const ConfirmDialog = ({open, handleClose,confirmModalAction, title}) => 
         >
             <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
             <DialogContent>
+                {children}
             </DialogContent>
             <DialogActions>
             <Button onClick={()=>confirmModalAction()} color="primary">

@@ -1,6 +1,6 @@
 import React , {useState} from 'react'
 import {firebase} from '../firebase';
-import {useProjectsValue} from '../context';
+import {useProjectsValue, useSelectedProjectValue} from '../context';
 import {ConfirmDialog} from './ConfirmDialog';
 import { Grid} from '@material-ui/core';
 
@@ -14,6 +14,7 @@ export const Project = ({project}) => {
     const {projects, setProjects} = useProjectsValue();
     const [showModal, setShowModal] = useState(false)
     const [showDeleteIcon, setShowDeleteIcon] = useState(false)
+    const {setSelectedProject} = useSelectedProjectValue();
 
     const deleteProject = id => {
         firebase
@@ -23,7 +24,7 @@ export const Project = ({project}) => {
             .delete()
             .then(() => {
                 setProjects([...projects])
-                // setSelectedProject('INBOX')
+                setSelectedProject('INBOX')
             })
     }
  

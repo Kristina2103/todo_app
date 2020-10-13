@@ -1,23 +1,41 @@
-import React from 'react';
-import {Checkbox} from './Checkbox';
+import React, {useState} from 'react';
 import {useTasks} from '../hooks';
-import {useSelectedProjectValue} from '../context';
+import {useProjectsValue, useSelectedProjectValue} from '../context';
+import { collatedTasksExist, getTitle, getCollatedTitle } from '../helpers';
+import { collatedTasks } from '../constants';
+import {FormControlLabel, Checkbox } from '@material-ui/core';
 
 export const Tasks = () => {
-    const {tasks} = useTasks('1');
-    // const {selectedProject} = useSelectedProjectValue();
-    // console.log(selectedProject)
-    let projectName = '';
     
+    const {projects} = useProjectsValue();
+    const {selectedProject} = useSelectedProjectValue();
+    const {tasks} = useTasks(selectedProject);
+    const [checked, setChecked] = useState();
+    let projectName = '';
+    //if project is from database
+    if(projects && selectedProject && !collatedTasksExist(selectedProject)){
+        projectName = getTitle(projects, selectedProject).name;
+    }
+
+    //if project is INBOX, TODAY or NEXT_7
+    if (collatedTasksExist(selectedProject) && selectedProject) {
+        projectName = getCollatedTitle(collatedTasks, selectedProject).name;
+      }
+
+    const handleChecked = id => {
+        console.log(id)
+    }
     return (
         <div className="tasks" data-testid="tasks">
             <h2 data-testid="project-name">{projectName}</h2>
-            <ul className="tasks__list">
-            {tasks.map(task => <li key={`${task.id}`}>
-                <Checkbox id={task.id} />
-                <span>{task.task}</span>
-            </li>)}
-            </ul>
+           
+            {tasks.map(task => <div key={`${task.id}`}>
+                <FormControlLabel
+                    control={<Checkbox checked={checked} onChange={() => handleChecked(task.id)} name={task.id} />}
+                    label={task.task}
+                />
+            </div>)}
+         
         </div>
     )
 }
