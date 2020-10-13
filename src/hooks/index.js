@@ -41,7 +41,6 @@ export const useTasks = selectedProject => {
             )
           : newTasks.filter(task => task.archived !== true)
       );
-      
       setArchivedTasks(newTasks.filter(task => task.archived !== false));
     });
 
@@ -54,24 +53,23 @@ export const useTasks = selectedProject => {
 export const useProjects = () => {
   const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection('projects')
-      .where('userId', '==', 'u53OEYbbCAPeYqZ7XMPf')
-      .orderBy('projectId')
-      .get()
-      .then(snapshot => {
-        const allProjects = snapshot.docs.map(project => ({
-          ...project.data(),
-          docId: project.id,
-        }));
-
-        if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
-          setProjects(allProjects);
-        }
-      });
-  }, [projects]);
+useEffect(() => {
+  firebase
+    .firestore()
+    .collection('projects')
+    .where('userId', '==', 'u53OEYbbCAPeYqZ7XMPf')
+    .orderBy('projectId')
+    .get()
+    .then(snapshot => {
+      const allProjects = snapshot.docs.map(project => ({
+        ...project.data(),
+        docId: project.id,
+      }));
+      if (allProjects.length !== projects.length) {
+        setProjects(allProjects);
+      }
+    });
+}, [projects]);
 
   return { projects, setProjects };
 };

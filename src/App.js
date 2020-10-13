@@ -1,10 +1,16 @@
 import React from "react";
-import { Header } from "./components/Layout/Header";
 import { Content } from "./components/Layout/Content";
+import {SidebarDrawer} from "./components/SidebarDrawer";
+import {SelectedProjectProvider, ProjectsProvider } from './context';
 
 export const App = () => (
-  <div className="App">
-    <Header />
-    <Content />
-  </div>
+  <SelectedProjectProvider>
+    <ProjectsProvider>
+      <div className="App">
+      <SidebarDrawer >
+        <Content />
+        </SidebarDrawer>
+      </div>
+    </ProjectsProvider>
+  </SelectedProjectProvider>
 );

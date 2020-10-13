@@ -1,5 +1,6 @@
 import React from "react";
-import {Grid, AppBar, Toolbar,IconButton, Typography, Button} from '@material-ui/core';
+import {Projects} from '../Projects';
+import { Grid, Typography} from '@material-ui/core';
 //Icons
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import InboxIcon from '@material-ui/icons/Inbox';
@@ -30,18 +31,14 @@ export const Sidebar = () => (
     </ul>
 
     {/* Sidebar Middle */}
-    <div className="sidebar__middle">
+    <Grid container direction="column">
     
-        <Typography variant="h4">
-          <ExpandMoreIcon /> Projects
-        </Typography>
+      <Typography variant="h4">
+        <ExpandMoreIcon /> Projects
+      </Typography>
      
-      {/* Projects */}
-      <ul className="sidebar__projects">
-        <li>
-          <span>Projects here...</span>
-        </li>
-      </ul>
-    </div>
+      <Projects />
+      
+    </Grid>
   </div>
 );
